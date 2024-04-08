@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Moment1</title>
+    <link rel="stylesheet" href="/public/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <h1>Lägg till kurser</h1>
+        <nav>
+            <ul class="navlinks">
+                <li><a href="index.html">Startsidan</a></li>
+                <li><a href="add.html" class="current">Lägg till på CV:t</a></li>
+                <li><a href="about.html">Om sidan</a></li>
+            </ul>
+        </nav>
+    </header>
+    <div id="formStyle">
+        
+    <form id="experienceForm" method="post">
+        <label for="companyname">Arbetsgivare:</label><br>
+        <input type="text" id="companyname" name="companyname" required>
+        <br>
+        <label for="jobtitle">Titel:</label><br>
+        <input type="text" id="jobtitle" name="jobtitle" required>
+        <br>
+        <label for="location">Ort:</label><br>
+        <input type="text" id="location" name="location" required>
+        <br>
+        <label for="startdate">Startdatum:</label><br>
+        <input type="date" id="startdate" name="startdate" required>
+        <br>
+        <label for="enddate">Slutdatum:</label><br>
+        <input type="date" id="enddate" name="enddate" required>
+        <br>
+        <label for="description">Beskrivning:</label><br>
+        <input type="text" id="description" name="description" required>
+        <br>
+        <br>
+        <button id="createbutton" type="submit">Lägg till på CV:t</button>
+        <br>
+        <br>
+    </form>
+    
+    <div id="courseDetails"></div>
+</div>
+<script src="/public/js/main.js"></script>
+</body>
+</html>
