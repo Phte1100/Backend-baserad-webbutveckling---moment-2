@@ -64,24 +64,35 @@ document.addEventListener('DOMContentLoaded', (event) => {
 function displayCVData(data) {
     const container = document.getElementById('cvData');
     if (!container) return;
-    
-    const list = data.map(item => `
-        <div class="cv-item">
-            <h2>${item.companyname}</h2>
-            <ul class="list">
-                <li><b>Titel:</b> ${item.jobtitle}</li>
-                <li><b>Ort:</b> ${item.location}</li>
-                <li><b>Startdatum:</b> ${item.startdate}</li>
-                <li><b>Slutdatum:</b> ${item.enddate}</li>
-                <li><b>Beskrivning:</b> ${item.description}</li>
-            </ul>
-            <button type="button" class="btn delete-btn" data-cvid="${item.id}">Ta bort ur listan</button>
-        </div>
-    `).join('');
+
+    // Sortera data baserat på 'enddate' i fallande ordning
+    data.sort((a, b) => {
+        let dateA = new Date(a.enddate);
+        let dateB = new Date(b.enddate);
+        return dateB - dateA; // Byt till `dateA - dateB` för stigande ordning
+    });
+
+    const list = data.map(item => {
+        const startdate = item.startdate.split('T')[0];
+        const enddate = item.enddate.split('T')[0];
+
+        return `
+            <div class="cv-item">
+                <h2>${item.companyname}</h2>
+                <ul class="list">
+                    <li><b>Titel:</b> ${item.jobtitle}</li>
+                    <li><b>Ort:</b> ${item.location}</li>
+                    <li><b>Startdatum:</b> ${startdate}</li>
+                    <li><b>Slutdatum:</b> ${enddate}</li>
+                    <li><b>Beskrivning:</b> ${item.description}</li>
+                </ul>
+                <button type="button" class="btn delete-btn" data-cvid="${item.id}">Ta bort ur listan</button>
+            </div>
+        `;
+    }).join('');
     
     container.innerHTML = list;
 
-    // Lägg till event listeners för alla nya "Ta bort"-knappar
     attachDeleteEventListeners();
 }
 
