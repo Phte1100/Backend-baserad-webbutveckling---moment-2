@@ -2,16 +2,16 @@
 
 let url = "http://127.0.0.1:3000/api/cv";
 
-async function getData() {
+async function fetchCVData() {
     try {
-        const response = await fetch(url);
+        const response = await fetch(url); // Använder 'url' som redan är definierad
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
         const data = await response.json();
-        console.table(data);
+        displayCVData(data); // Visar data med displayCVData funktionen
     } catch (error) {
-        console.error("Could not fetch data: ", error);
+        console.error("Could not fetch CV data: ", error);
     }
 }
 
@@ -77,7 +77,7 @@ function displayCVData(data) {
         const enddate = item.enddate.split('T')[0];
 
         return `
-            <div class="cv-item">
+            <article class="cv-item">
                 <h2>${item.companyname}</h2>
                 <ul class="list">
                     <li><b>Titel:</b> ${item.jobtitle}</li>
@@ -87,7 +87,7 @@ function displayCVData(data) {
                     <li><b>Beskrivning:</b> ${item.description}</li>
                 </ul>
                 <button type="button" class="btn delete-btn" data-cvid="${item.id}">Ta bort ur listan</button>
-            </div>
+            </article>
         `;
     }).join('');
     
@@ -113,19 +113,6 @@ function attachDeleteEventListeners() {
             .catch(error => console.error('Error:', error));
         });
     });
-}
-
-async function fetchCVData() {
-    try {
-        const response = await fetch(url); // Använder 'url' som redan är definierad
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        const data = await response.json();
-        displayCVData(data); // Visar data med displayCVData funktionen
-    } catch (error) {
-        console.error("Could not fetch CV data: ", error);
-    }
 }
 
 document.addEventListener('DOMContentLoaded', fetchCVData);
