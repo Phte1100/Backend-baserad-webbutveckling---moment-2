@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Moment1</title>
+    <title>Moment2</title>
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -24,22 +24,22 @@
         
     <form id="experienceForm" method="post">
         <label for="companyname">Arbetsgivare:</label><br>
-        <input type="text" id="companyname" name="companyname" required>
+        <input type="text" id="companyname" name="companyname">
         <br>
         <label for="jobtitle">Titel:</label><br>
-        <input type="text" id="jobtitle" name="jobtitle" required>
+        <input type="text" id="jobtitle" name="jobtitle">
         <br>
         <label for="location">Ort:</label><br>
-        <input type="text" id="location" name="location" required>
+        <input type="text" id="location" name="location">
         <br>
         <label for="startdate">Startdatum:</label><br>
-        <input type="date" id="startdate" name="startdate" required>
+        <input type="date" id="startdate" name="startdate">
         <br>
         <label for="enddate">Slutdatum:</label><br>
-        <input type="date" id="enddate" name="enddate" required>
+        <input type="date" id="enddate" name="enddate">
         <br>
         <label for="description">Beskrivning:</label><br>
-        <input type="text" id="description" name="description" required>
+        <textarea id="description" name="description"></textarea>
         <br>
         <br>
         <button id="createbutton" type="submit">Lägg till på CV:t</button>
@@ -47,7 +47,7 @@
         <br>
     </form>
     
-    <div id="courseDetails"></div>
+    <div id="formFeedback"></div>
 </div>
 <script src="main.js"></script>
 </body>

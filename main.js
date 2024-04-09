@@ -17,13 +17,14 @@ async function fetchCVData() {
 
 async function createInput(companyname, jobtitle, location, startdate, enddate, description) {
     let input = {
-        companyname: companyname,
-        jobtitle: jobtitle,
-        location: location,
-        startdate: startdate,
-        enddate: enddate,
-        description: description
+        companyname,
+        jobtitle,
+        location,
+        startdate,
+        enddate,
+        description
     };
+
     try {
         const response = await fetch(url, {
             method: "POST",
@@ -32,31 +33,85 @@ async function createInput(companyname, jobtitle, location, startdate, enddate, 
             },
             body: JSON.stringify(input)
         });
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
+
+        if (!response.ok) throw new Error('Något gick fel vid publiceringen.');
+
         const data = await response.json();
         console.log(data);
+
+        // Visa bekräftelsemeddelande
+        document.getElementById('formFeedback').innerHTML = "<p>Data har publicerats framgångsrikt!</p>";
+        document.getElementById('formFeedback').style.color = "green";
+
+        // Rensa formuläret här om allt gick bra
+        document.getElementById('experienceForm').reset();
     } catch (error) {
         console.error("Could not post data: ", error);
+
+        // Visa felmeddelande
+        document.getElementById('formFeedback').innerHTML = "<p>Kunde inte publicera data. Vänligen försök igen.</p>";
+        document.getElementById('formFeedback').style.color = "red";
     }
 }
 
 document.addEventListener('DOMContentLoaded', (event) => {
     const form = document.getElementById('experienceForm');
-    if(form) { // Kontrollerar om form elementet existerar
-        form.addEventListener('submit', function(event) {
-            event.preventDefault(); // Förhindrar standardbeteendet för formulärskick
-            const formData = {
-                companyname: document.getElementById('companyname').value,
-                jobtitle: document.getElementById('jobtitle').value,
-                location: document.getElementById('location').value,
-                startdate: document.getElementById('startdate').value,
-                enddate: document.getElementById('enddate').value,
-                description: document.getElementById('description').value
-            };
-            
-            createInput(formData.companyname, formData.jobtitle, formData.location, formData.startdate, formData.enddate, formData.description);
+    if(form) {
+        form.addEventListener('submit', async function(event) {
+            event.preventDefault();
+            const companyname = document.getElementById('companyname').value;
+            const jobtitle = document.getElementById('jobtitle').value;
+            const location = document.getElementById('location').value;
+            const startdate = document.getElementById('startdate').value;
+            const enddate = document.getElementById('enddate').value;
+            const description = document.getElementById('description').value;
+
+            let errors = [];
+            if (companyname === "") {
+                errors.push("Företagsnamn får inte vara tomt.");
+            }
+            if (jobtitle === "") {
+                errors.push("Jobbtitel får inte vara tom.");
+            }
+            if (location === "") {
+                errors.push("Plats får inte vara tom.");
+            }
+            if (startdate === "") {
+                errors.push("Startdatum får inte vara tomt.");
+            }
+            if (enddate === "") {
+                errors.push("Slutdatum får inte vara tomt.");
+            }
+            if (description === "") {
+                errors.push("Beskrivning får inte vara tom.");
+            }
+
+            // Rensa tidigare feedback
+            document.getElementById('formFeedback').innerHTML = "";
+
+            // Kör kod för att spara data om inga fel finns
+            if (errors.length === 0) {
+                try {
+                    const response = await createInput(companyname, jobtitle, location, startdate, enddate, description);
+                    if(response.ok) {
+                        // Visa bekräftelsemeddelande
+                        document.getElementById('formFeedback').innerHTML = "<p>Data har publicerats framgångsrikt!</p>";
+                        document.getElementById('formFeedback').style.color = "green";
+                        form.reset(); // Rensar formuläret
+                    } else {
+                        throw new Error('Något gick fel vid publiceringen.');
+                    }
+                } catch (error) {
+                    document.getElementById('formFeedback').innerHTML = "<p>Kunde inte publicera data. Vänligen försök igen.</p>";
+                    document.getElementById('formFeedback').style.color = "red";
+                }
+            }
+            // Om fel, visa felmeddelanden
+            else {
+                const errorsHtml = errors.map(error => `<li>${error}</li>`).join('');
+                document.getElementById('formFeedback').innerHTML = `<p>Följande fel uppstod:</p><ul>${errorsHtml}</ul>`;
+                document.getElementById('formFeedback').style.color = "red";
+            }
         });
     }
 });
@@ -65,11 +120,14 @@ function displayCVData(data) {
     const container = document.getElementById('cvData');
     if (!container) return;
 
+    // Visa 'cvData' endast om det finns data
+    container.style.display = data.length > 0 ? 'block' : 'none';
+
     // Sortera data baserat på 'enddate' i fallande ordning
     data.sort((a, b) => {
         let dateA = new Date(a.enddate);
         let dateB = new Date(b.enddate);
-        return dateB - dateA; // Byt till `dateA - dateB` för stigande ordning
+        return dateB - dateA;
     });
 
     const list = data.map(item => {
@@ -90,7 +148,7 @@ function displayCVData(data) {
             </article>
         `;
     }).join('');
-    
+
     container.innerHTML = list;
 
     attachDeleteEventListeners();
