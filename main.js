@@ -1,6 +1,6 @@
 "use strict";
 
-let url = "http://127.0.0.1:3000/api/cv";
+let url = "https://backend-baserad-webbutveckling-server-2.onrender.com";
 
 async function fetchCVData() {
     try {
@@ -100,7 +100,7 @@ function attachDeleteEventListeners() {
     document.querySelectorAll('.delete-btn').forEach(button => {
         button.addEventListener('click', function() {
             const cvId = this.getAttribute('data-cvid');
-            fetch(`http://127.0.0.1:3000/api/cv/${cvId}`, { method: 'DELETE' })
+            fetch(`https://backend-baserad-webbutveckling-server-2.onrender.com/${cvId}`, { method: 'DELETE' })
             .then(response => response.json())
             .then(data => {
                 if(data.success) {
