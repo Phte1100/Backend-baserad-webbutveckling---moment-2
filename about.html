@@ -25,22 +25,15 @@
             <div>
                 <h2>Om sidan</h2>
                 <p>
-                    Den här webbsidan är en del av mitt skolarbete i kursen DT207G, som handlar om webbutveckling med fokus på server-sidan. Sidan gör det möjligt för användare att hålla koll på vilka kurser de har tagit eller vill ta i framtiden, vilket kan vara användbart för att bygga ett digitalt CV eller bara för att hålla reda på intressanta kurser.
+                    Den här sidan är ett projekt jag skapat för kursen Backendbaserad webbutveckling. Här kan användare smidigt bygga upp sitt CV online genom att lägga till arbetserfarenheter, vilket gör det enklare att presentera sin yrkesbakgrund.
                 </p>
                 <p>
-                    All information som användare matar in via ett formulär sparas i en mariaDB-databas. När hemsidan öppnas visas en lista på alla kurser som finns sparade i databasen. Det är också möjligt att ta bort specifika kurser från listan efter behov.
+                    Projektet använder CRUD-operationer (Create, Read, Update, Delete) för att hantera data, vilket är standard inom webbutveckling för att skapa dynamiska och interaktiva webbplatser. Jag har implementerat funktionerna för att skapa nya poster, visa befintliga, och ta bort dem. Däremot valde jag att inte inkludera funktionen för att uppdatera (PUT) poster i det här projektet.
+                <p>
+                    All information som läggs till sparas i en mariaDB-databas, vilket gör det enkelt att hantera data på servern. För att bygga och utveckla sidan har jag använt Visual Studio Code, Node.js, Express för serverhantering och mySQL för databasen.
                 </p>
                 <p>
-                    Databasen för denna webbplats består av en enda tabell där information om kurserna lagras, som kursens namn, kod, länk till mer information, och vilket skede i utbildningen kursen tillhör. Denna struktur på databasen bestämdes med hjälp av ett ER-diagram.
-                </p>
-                <p>
-                    För att bygga och utveckla sidan har jag använt programmeringsmiljön Visual Studio Code och skapat projektet med Node.js. Projektet använder sig av Express som server, bodyParser för att hantera data som skickas via formulär, mySQL för databashanteringen och EJS för att skapa sidans gränssnitt.
-                </p>
-                <p>
-                    Genom att göra den här uppgiften har jag lärt mig mer om hur webbutveckling fungerar på server-sidan. Även om jag fortfarande har mycket kvar att lära när det gäller att använda Express-servern, så var processen att hämta och lagra data smidigare jämfört med en liknande uppgift jag gjorde i en kurs om Frontend-utveckling med TypeScript.
-                </p>
-                <p>
-                    Jag ser många fördelar med att utveckla webbplatser på server-sidan, inte minst när det kommer till säkerhet och kontroll över webbplatsens funktioner. Att arbeta med en mariaDB-databas var också väldigt effektivt och enkelt.
+                    Att arbeta med detta projekt har både varit underhållande samt lärorikt. Jag har lärt mig hur CRUD-operationer fungerar i praktiken.
                 </p>
             </div>
             <script src="main.js"></script>

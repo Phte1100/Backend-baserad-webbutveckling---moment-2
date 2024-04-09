@@ -86,25 +86,11 @@ document.addEventListener('DOMContentLoaded', (event) => {
                 errors.push("Beskrivning får inte vara tom.");
             }
 
-            // Rensa tidigare feedback
+            // Rensa tidigare input
             document.getElementById('formFeedback').innerHTML = "";
 
-            // Kör kod för att spara data om inga fel finns
             if (errors.length === 0) {
-                try {
-                    const response = await createInput(companyname, jobtitle, location, startdate, enddate, description);
-                    if(response.ok) {
-                        // Visa bekräftelsemeddelande
-                        document.getElementById('formFeedback').innerHTML = "<p>Data har publicerats framgångsrikt!</p>";
-                        document.getElementById('formFeedback').style.color = "green";
-                        form.reset(); // Rensar formuläret
-                    } else {
-                        throw new Error('Något gick fel vid publiceringen.');
-                    }
-                } catch (error) {
-                    document.getElementById('formFeedback').innerHTML = "<p>Kunde inte publicera data. Vänligen försök igen.</p>";
-                    document.getElementById('formFeedback').style.color = "red";
-                }
+                createInput(companyname, jobtitle, location, startdate, enddate, description);
             }
             // Om fel, visa felmeddelanden
             else {
