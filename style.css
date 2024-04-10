@@ -183,7 +183,7 @@ input:active {
 #createbutton, #clearbutton {
     padding: 0.25em 0.75em;
   }
-#courseDetails {
+#cvDetails {
     max-width: 80%;
     min-width: 295px;
 }
