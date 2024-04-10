@@ -1,5 +1,5 @@
 "use strict";
-
+// Definiera bas-URL för API-anrop
 let url = "https://backend-baserad-webbutveckling-server-2.onrender.com/api/cv";
 
 async function fetchCVData() {
@@ -15,6 +15,7 @@ async function fetchCVData() {
     }
 }
 
+// Funktion för att skapa nytt inlägg
 async function createInput(companyname, jobtitle, location, startdate, enddate, description) {
     let input = {
         companyname,
@@ -27,7 +28,7 @@ async function createInput(companyname, jobtitle, location, startdate, enddate, 
 
     try {
         const response = await fetch(url, {
-            method: "POST",
+            method: "POST", // POST-metoden för att skapa ett nytt inlägg
             headers: {
                 "Content-Type": "application/json"
             },
@@ -54,11 +55,14 @@ async function createInput(companyname, jobtitle, location, startdate, enddate, 
     }
 }
 
+// Initiera när dokumentet laddas
 document.addEventListener('DOMContentLoaded', (event) => {
     const form = document.getElementById('experienceForm');
     if(form) {
         form.addEventListener('submit', async function(event) {
             event.preventDefault();
+
+            // Samla in värden från formuläret
             const companyname = document.getElementById('companyname').value;
             const jobtitle = document.getElementById('jobtitle').value;
             const location = document.getElementById('location').value;
@@ -66,6 +70,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
             const enddate = document.getElementById('enddate').value;
             const description = document.getElementById('description').value;
 
+            // Kontrollera formulär för fel
             let errors = [];
             if (companyname === "") {
                 errors.push("Företagsnamn får inte vara tomt.");
