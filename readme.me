@@ -1,0 +1,7 @@
+Detta är frontend-delen av Moment 2 för Backendbaserad webbutveckling. Applikationen tillåter användare att skapa, visa och hantera sina arbetserfarenheter för att bygga upp ett digitalt CV. Projektet är byggt med HTML, CSS och JavaScript, och interagerar med en RESTful API byggd med Node.js och Express för datalagring och hantering.
+
+Det viktigaste i frontend-applikationen är main.js. Det här skriptet hanterar alla interaktioner med backend-API:t, inklusive att hämta befintliga arbetserfarenheter, skapa nya poster och ta bort dem. Funktioner som fetchCVData, createInput och attachDeleteEventListeners är centrala delar av funktionaliteten.
+
+När sidan laddas körs fetchCVData för att hämta och visa befintliga arbetserfarenheter. Användare kan lägga till nya erfarenheter via formuläret, vilket sedan skickas till servern med createInput. Om användaren väljer att ta bort en post används attachDeleteEventListeners för att lyssna efter klick på raderaknapparna och skicka en DELETE-begäran till API:t.
+
+Användarfeedback och felhantering hanteras genom dynamisk uppdatering av formFeedback-elementet. Användarna informeras om framgången eller misslyckandet av deras åtgärder.
